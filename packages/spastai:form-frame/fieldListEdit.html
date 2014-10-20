@@ -1,0 +1,19 @@
+<template name="fieldListedit">
+    <div class="input-append" id="{{field}}">
+	    <input type="text" id="{{field}}-text">
+   		<div class="btn-group">
+			<button type="button" class="btn addToList" tabindex="-1">Add</button>
+			<button type="button" class="btn dropdown-toggle" tabindex="-1" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a class="deleteFromList" href="#">Delete</a></li>
+			</ul>    		
+   		</div>
+   	</div>
+	<select multiple="multiple" style="display: block;">
+		{{#each items}}
+			<option class="listEditItem">{{this}}</option>
+		{{/each}}
+	</select>    	
+</template>

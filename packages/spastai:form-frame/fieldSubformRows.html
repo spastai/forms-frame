@@ -1,0 +1,38 @@
+<template name="fieldSubformrows">
+  <span id="{{field}}">
+      <table class="table">
+      <tbody>
+        <tr>
+          {{#each form}}
+          <td>
+            <label for="{{field}}">{{label}}</label>
+          </td>
+          {{/each}}
+          <td></td>
+        </tr>
+        {{#each markedResult}}
+        <tr>
+	        {{#each cell}}
+	          <td>{{this}}</td>
+	        {{/each}}
+	        <td>
+	          <button type="button" class="btn editRow"><i class="icon-edit"></i></button>
+	          <button type="button" class="btn removeRow"><i class="icon-remove"></i></button>
+	        </td> 
+        </tr>
+        {{/each}} 
+        <tr>
+          {{#each form}}
+          <td>
+            {{> getFieldTemplate .}}
+          </td>
+          {{/each}}
+          <td>
+            <button type="button" class="btn addRow">Add</button>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+  </span>
+</template> 
+  
