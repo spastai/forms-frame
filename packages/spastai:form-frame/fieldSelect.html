@@ -1,6 +1,6 @@
 <template name="fieldSelect">
-	<select id="{{field}}"  class="{{clazz}}">
-		{{#each items ../..}}
+	<select id="{{field}}" {{attrs}} size="{{size}}" class="select {{clazz}}">
+		{{#each items ..}}
 			<option value="{{value}}" {{selected}} >{{title}}</option>
 		{{/each}}
 	</select>    	

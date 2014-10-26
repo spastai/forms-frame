@@ -1,0 +1,9 @@
+<template name="fieldRadio">
+  <div id="{{field}}" class="{{clazz}}">
+		{{#each items ../..}}
+		<label class="radio-inline">
+		  <input type="radio"  id="{{../field}}-{{value}}" name="{{../field}}" value="{{value}}" class="check" {{selected}}>{{title}}
+		</label>		
+		{{/each}}
+	</div>
+</template>

@@ -21,23 +21,25 @@ if (Meteor.isClient) {
 	var demoForm = [
 		{field: 'url', type: 'text', label: "Feed URL", placeholder: "Enter URL", clazz: "form-control"},
 		{field: 'media', type: 'select', label: "Media", placeholder: "Select category", clazz: "form-control", options: categories},
-		{field: "form", type: "subformRows", form: fieldForm}
+		{field: "form", type: "subformRows", form: fieldForm},
+		{field: 'check', type: 'checkbox', label: "Agreement", placeholder: "Enter URL", clazz: "form-control"},
 	]
 	
 	// counter starts at 0
 	Session.setDefault("counter", 0);
-	createFormValues(demoForm, {});
 	
   Template.hello.helpers({
     counter: function () {
       return Session.get("counter");
     }, 
-    demoForm: demoForm,
+    demoForm: createFormValues(demoForm, {})
   });
 
   Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
+    'click button': function (event, template) {
+//      console.dir(template);
+//      console.dir(this);
+//      var values = getFormValues(template.data.demoForm, template);
       Session.set("counter", Session.get("counter") + 1);
     }
   });

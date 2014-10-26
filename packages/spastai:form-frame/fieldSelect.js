@@ -8,3 +8,12 @@ Template.fieldSelect.items = function(parent) {
 	};
 	return result;
 };
+
+Template.fieldSelect.events({
+	'change .select': function(event, template) {
+		value = $(event.target).val();
+		//d("Selected:"+value);
+		template.data.setResult && template.data.setResult(value);
+		template.data.result = value;
+	}	
+})
