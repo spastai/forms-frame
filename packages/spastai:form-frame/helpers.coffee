@@ -10,7 +10,6 @@ createFormValues = (form, values) ->
   _(form).each (item) ->
     result.push _.extend(
       value: values[item.field]
-      result: if _.isEmpty(values[item.field]) then undefined else values[item.field] 
       dep: new Deps.Dependency # for showing errors
       parent: result
     , item)
@@ -27,9 +26,8 @@ getFormValues = (form, template) ->
     element = template.find("#" + id)
     result[id] = if form[f].getResult
       form[f].getResult() 
-    else if _.isUndefined(form[f].result)
+    else 
       $(element).val()
-    else   
-      form[f].result  
+ 
   #console.dir(result);
   result
