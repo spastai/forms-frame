@@ -1,23 +1,25 @@
 Template.fieldSubformrows.created = function() {
 	this.data.dep = new Deps.Dependency;
-	this.data.setResult && this.data.setResult(this.data.value);	
+	this.data.setResult && this.data.setResult(this.data.value);
 }
 
 // Adding Id's to the rows
-Template.fieldSubformrows.markedResult = function() {
-	this.dep.depend();
-	_(this.result).each(function(item){
-		item._id = new Mongo.ObjectID();
-	});
-	return this.result;
-}
+Template.fieldSubformrows.helpers({
+	markedResult: function() {
+		this.dep.depend();
+		_(this.result).each(function(item){
+			item._id = new Mongo.ObjectID();
+		});
+		return this.result;
+	},
 
-Template.fieldSubformrows.cell = function() {
-	return _.chain(this)
-		.omit("_id")
-		.values()
-		.value();
-}
+	cell: function() {
+		return _.chain(this)
+			.omit("_id")
+			.values()
+			.value();
+	}
+});
 
 Template.fieldSubformrows.events({
 	'click .addRow': function (event, template) {
