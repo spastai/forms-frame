@@ -13,5 +13,9 @@ unless typeof MochaWeb is "undefined"
 
         #console.dir(["Checkbox found:", $("#check")]);
         values = Session.get("values");
-        console.dir(["Test values:", values]);
+        console.log(["Test SubformRows values:", values]);
         #chai.assert.equal(v)
+
+        # Forse form re-rendering and setResults setting
+        Router.go('Blank');
+        Tracker.flush();

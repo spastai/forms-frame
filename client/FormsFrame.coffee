@@ -1,4 +1,4 @@
-categories = ()-> 
+categories = ()->
 	return [
 	  {title: "Audio", value: "audio"},
 	  {title: "Video", value: "video"}
@@ -25,29 +25,31 @@ demoForm = [
 ]
 
 Template.Blank.rendered  = ()->
-  console.log("Blank rendered");
-	
+  #console.log("Blank rendered");
+
 class @TestFormController extends RouteController
   template: "TestForm",
 
   data: ()=>
     query = {};
     formValues = createFormValues(demoForm, query);
-    result = 
-      form: formValues	
+    result =
+      form: formValues
 
-Template.TestForm.helpers 
+Template.TestForm.rendered  = ()->
+	#console.log("TestForm rendered");
+
+Template.TestForm.helpers
   values: ()->
     val = Session.get("values") || {};
     _.map val, (item, key)->
-      pair = 
+      pair =
         key: key
         value: item
-  
+
 Template.TestForm.events
   'click .save':  (event, template)->
     console.log("Saving values");
     values = getFormValues(template.data.form, template);
-    #console.dir({m: "Form data", v: template.data.form});    
+    #console.dir({m: "Form data", v: template.data.form});
     Session.set "values", values
-

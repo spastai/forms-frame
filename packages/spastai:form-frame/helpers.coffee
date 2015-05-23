@@ -18,16 +18,16 @@ createFormValues = (form, values) ->
 getFormValues = (form, template) ->
   result = {}
   ###
-  d "Fetching values from DOM and form variable:", _.map form, (item)-> 
+  console.log s:"Fetching values from DOM and form variable:", v:_.map form, (item)->
     _.omit(item, 'dep')
   ###
   for f of form
     id = form[f].field
     element = template.find("#" + id)
     result[id] = if form[f].getResult
-      form[f].getResult() 
-    else 
+      form[f].getResult()
+    else
       $(element).val()
- 
+
   #console.dir(result);
   result

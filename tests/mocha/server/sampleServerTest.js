@@ -1,3 +1,4 @@
+/*
 if (!(typeof MochaWeb === 'undefined')){
   MochaWeb.testOnly(function(){
     describe("Server initialization", function(){
@@ -7,3 +8,4 @@ if (!(typeof MochaWeb === 'undefined')){
     });
   });
 }
+*/

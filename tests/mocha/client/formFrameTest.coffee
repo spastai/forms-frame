@@ -15,8 +15,8 @@ unless typeof MochaWeb is "undefined"
         Tracker.flush();
         $("#save").click();
         values = Session.get("values");
-        chai.assert.isFalse(values.check)
-        #console.dir(["Test values:",values]);
+        #console.log({m:"Test values:",v:values});
+        chai.assert.isFalse(values.check, "Fresh checkbox should be false")
         # Forse form re-rendering and setResults setting
         Router.go('Blank');
         Tracker.flush();
@@ -33,7 +33,7 @@ unless typeof MochaWeb is "undefined"
         $("#save").click();
         #console.dir(["Checkbox found:", $("#check")]);
         values = Session.get("values");
-        console.dir(["Test values:", values]);
+        #console.log(["Test values:", values]);
         chai.assert.isTrue(values.check)
         #chai.assert.equal(v)
 
