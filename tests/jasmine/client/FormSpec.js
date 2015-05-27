@@ -3,11 +3,12 @@ describe("Tutorials template", function() {
         var div = document.createElement("DIV");
         var data = {tutorials: [{}, {}]};
         data.tutorials.count = function() { return 2; }
- 
+
+        console.log("Render with data");
         var comp = Blaze.renderWithData(Template.tutorials, data);
- 
+
         Blaze.insert(comp, div);
-    
+
         expect($(div).find(".tutorialLine").length).toEqual(2);
     });
 });

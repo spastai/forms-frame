@@ -6,15 +6,16 @@ unless typeof MochaWeb is "undefined"
         Tracker.flush();
 
         # subformRows
-        $("#field").val("SomeValue");
+        $("#field").val("SubFormTestValue");
 
         $(".addRow").click();
+
         $("#save").click();
 
         #console.dir(["Checkbox found:", $("#check")]);
         values = Session.get("values");
-        console.log(["Test SubformRows values:", values]);
-        #chai.assert.equal(v)
+        #console.log({m:"Test SubformRows values:", v:values});
+        chai.assert.isUndefined(values.form[0]._id)
 
         # Forse form re-rendering and setResults setting
         Router.go('Blank');
