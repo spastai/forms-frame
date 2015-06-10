@@ -9,3 +9,7 @@ spastai:form-frame
 coffeescript
 mike:mocha
 iron:router
+spastai:forms-field-address
+spastai:logw
+forms-field-pagepicture
+http

@@ -40,7 +40,7 @@ unless typeof MochaWeb is "undefined"
     describe "Form edit, keep unchanged, create", ->
       it "should show previous values", ->
         Router.go('Blank');
-        console.log("Go to blank and flush for TC3");
+        #console.log("Go to blank and flush for TC3");
         query =
           check: true;
         data =
@@ -59,7 +59,7 @@ unless typeof MochaWeb is "undefined"
     describe "Form edit, change, create", ->
       it "should show new values", ->
         Router.go('Blank');
-        Log.info("Go to blank and flush for TC4");
+        #Log.info("Go to blank and flush for TC4");
         query =
           check: true;
         data =

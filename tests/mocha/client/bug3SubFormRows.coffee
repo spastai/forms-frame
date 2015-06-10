@@ -12,9 +12,11 @@ unless typeof MochaWeb is "undefined"
 
         $("#save").click();
 
-        #console.dir(["Checkbox found:", $("#check")]);
+        Tracker.flush();
+
+        # bus is related to rendering - for rendering _id are added, so they appear in "result" only after some time
         values = Session.get("values");
-        #console.log({m:"Test SubformRows values:", v:values});
+        #console.log({m:"Test SubformRows values:", v:JSON.stringify(values)});
         chai.assert.isUndefined(values.form[0]._id)
 
         # Forse form re-rendering and setResults setting

@@ -1,0 +1,114 @@
+Template.fieldAddress.rendered = function() {
+	var self = this;
+	element = document.getElementById(this.data.field);
+
+	var mapElement = document.getElementById(this.data.field+"-map");
+	googleServices.afterInit(function() {
+		var center = undefined;
+		if(self.data.mapCenter) {
+			loc = self.data.mapCenter();
+			if(loc) {
+				center = new google.maps.LatLng(loc[1],loc[0]);
+			}
+		} else if ( ((ref = Meteor.settings) != null) && ((ref1 = ref.formsFrame) != null) && ((ref2 = ref1.fieldAddress) != null)) {
+			fromProperties = Meteor.settings.formsFrame.fieldAddress.mapCenter;
+			center = new google.maps.LatLng(fromProperties[1],fromProperties[0]);
+		}
+		myOptions =  {
+			    zoom : 9,
+			    center : center || new google.maps.LatLng(38.0179356,-122.5365176),
+			    //center : new google.maps.LatLng(54.682106,25.280685),
+			    mapTypeId : google.maps.MapTypeId.ROADMAP
+	    }
+	    map = new google.maps.Map(mapElement, myOptions);
+		googleServices.addAutocomplete(element, map, function(addressText, place, map) {
+			//d("Setting address:"+self.data.field+" "+addressText);
+			self.data.result = {
+				address: addressText
+			};
+			//d("Start geocode addess :"+addressText)
+			googleServices.getGeocoder().geocode({'address': addressText}, function(error, result) {
+				d("Got geocode addess response:"+error, result)
+				if(!error && result.length > 0) {
+					var location = result[0].geometry.location;
+					self.data.result.location = [location.lng(), location.lat()]
+					if(!self.fromMarker) {
+						var pinImage = new google.maps.MarkerImage(
+					    		"http://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|home|24|000|FFF",
+						    	new google.maps.Size(32, 32),
+						        new google.maps.Point(0,0),
+						        new google.maps.Point(16, 32));
+						//d("Drop pin on map:"+pinImage, location)
+					 	self.fromMarker = new google.maps.Marker({
+				    	map: map,
+							position: location,
+				      icon: pinImage,
+				      draggable:true
+						});
+					}
+					self.fromMarker.setPosition(location);
+					map.setCenter(location);
+				} else {
+					self.data.result.location = ""
+				}
+				self.data.dep.changed();
+			});
+		});
+	});
+}
+
+Template.fieldAddress.helpers({
+	hasLocation: function() {
+		this.dep.depend();
+		//di("Returning location:", this);
+		return this.result && this.result.location;
+	}
+})
+
+
+Template.valueAddress.rendered = function() {
+	var self = this;
+
+	var mapElement = document.getElementById(this.data.field+"-map");
+	googleServices.afterInit(function() {
+		var center = undefined;
+		if(self.data.value && self.data.value.location) {
+			var loc = self.data.value.location;
+			center = new google.maps.LatLng(loc[1],loc[0]);
+		} else if(self.data.mapCenter) {
+			loc = self.data.mapCenter();
+			if(loc) {
+				center = new google.maps.LatLng(loc[1],loc[0]);
+			}
+		} else if ( ((ref = Meteor.settings) != null) && ((ref1 = ref.formsFrame) != null) && ((ref2 = ref1.fieldAddress) != null)) {
+			fromProperties = Meteor.settings.formsFrame.fieldAddress.mapCenter;
+			center = new google.maps.LatLng(fromProperties[1],fromProperties[0]);
+		}
+
+		// Draw map
+		myOptions =  {
+			    zoom : 9,
+			    center : center || new google.maps.LatLng(38.0179356,-122.5365176),
+			    //center : new google.maps.LatLng(54.682106,25.280685),
+			    mapTypeId : google.maps.MapTypeId.ROADMAP
+	    }
+    map = new google.maps.Map(mapElement, myOptions);
+
+		// Drop marker
+		if(!self.fromMarker && self.data.result.location) {
+			var pinImage = new google.maps.MarkerImage(
+						"http://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|home|24|000|FFF",
+						new google.maps.Size(32, 32),
+							new google.maps.Point(0,0),
+							new google.maps.Point(16, 32));
+			//d("Drop pin on map:"+pinImage, location)
+			self.fromMarker = new google.maps.Marker({
+					map: map,
+					position: location,
+					icon: pinImage,
+					draggable:true
+			});
+		}
+		self.fromMarker.setPosition(center);
+	});
+}

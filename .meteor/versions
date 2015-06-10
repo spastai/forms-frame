@@ -12,6 +12,7 @@ ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 fastclick@1.0.3
+forms-field-pagepicture@0.0.1
 geojson-utils@1.0.3
 handlebars@1.0.3
 html-tools@1.0.4
@@ -57,7 +58,11 @@ sanjo:meteor-version@1.0.0
 session@1.1.0
 spacebars@1.0.6
 spacebars-compiler@1.0.6
-spastai:form-frame@0.0.11
+spastai:flow-controll@0.0.7
+spastai:form-frame@0.0.18
+spastai:forms-field-address@0.0.5
+spastai:google-client@0.0.6
+spastai:logw@0.0.3
 templating@1.1.1
 tracker@1.0.7
 ui@1.0.6

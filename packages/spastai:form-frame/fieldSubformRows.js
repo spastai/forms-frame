@@ -3,6 +3,7 @@ Template.fieldSubformrows.created = function() {
 	this.data.dep = new Deps.Dependency;
 	this.data.setResult && this.data.setResult(this.data.value);
 	this.data.getResult = function() {
+		//console.log({m:"Subform result", v:self.data.result})
 		return self.data.result;
 	}
 }
@@ -11,17 +12,22 @@ Template.fieldSubformrows.created = function() {
 Template.fieldSubformrows.helpers({
 	markedResult: function() {
 		this.dep.depend();
+
+/*
 		_(this.result).each(function(item){
 			item._id = new Mongo.ObjectID();
 		});
 		return this.result;
+*/
 
-		/*
-		_(this.result).map(function(item){
+		rowsWithIds = _(this.result).map(function(item){
 			// create copy array of items to keep result var unaffected
-			_({_id:new Mongo.ObjectID()}).extend(item);
+			row = _({_id:new Mongo.ObjectID()}).extend(item);
+			//console.log({m:"Row", v: row});
+			return row;
 		});
-		*/
+		//console.log({m:"Marked rows", v: rowsWithIds});
+		return rowsWithIds;
 	},
 
 	cell: function() {
@@ -43,7 +49,7 @@ Template.fieldSubformrows.events({
 		//console.dir(this);
 	},
 	'click .removeRow': function (event, template) {
-		d("Search for "+this._id, this.result);
+		//d("Search for "+this._id, this.result);
 		var found =  _.findWhere(template.data.result, {_id: this._id})
 		var result = _.without(template.data.result, found);
 		template.data.setResult(result);

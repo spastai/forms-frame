@@ -1,0 +1,16 @@
+<template name="fieldAddress">
+  <div class="input-group has-feedback">
+	  <input id="{{field}}" type="text" placeholder="{{placeholder}}" class="{{clazz}}" value="{{value.address}}"/>
+    <div class="input-group-addon">{{#if hasLocation}}@{{/if}}</div>
+	</div>
+	<div id="{{field}}-map-{{formName}}" style="height: 200px;"></div>
+</template>
+
+<!--
+    {{#if hasLocation}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+ -->
+
+<template name="valueAddress">
+  <div><strong>{{value.address}}</strong></div>
+ 	<div id="{{field}}-map-value-{{formName}}" style="height: 200px;"></div>
+</template>

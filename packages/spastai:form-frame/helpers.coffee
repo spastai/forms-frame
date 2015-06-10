@@ -5,13 +5,29 @@ UI.registerHelper "getFieldTemplate", ->
   # console.dir(Template[template]);
   (if Template[template] then Template[template] else null)
 
-createFormValues = (form, values) ->
+UI.registerHelper "getValueTemplate", ->
+  if not @type then e("No field type attribute provided."); return
+
+  name = @type
+  template = "value" + name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()
+  if Template[template]
+    #d "Found teplate for "+template+" "+@field
+    Template[template]
+  else
+    #d "Use default teplate for "+template+" "+@field
+    Template['valueText']
+
+getUiid = ()->
+  new Mongo.ObjectID().toHexString();
+
+createFormValues = (form, values, formName = getUiid()) ->
   result = []
   _(form).each (item) ->
     result.push _.extend(
       value: values[item.field]
       dep: new Deps.Dependency # for showing errors
       parent: result
+      formName: formName
     , item)
   result
 
@@ -27,6 +43,9 @@ getFormValues = (form, template) ->
     element = template.find("#" + id)
     if form[f].getResult
       result[id] = form[f].getResult()
+    # This form is used in fieldAddress
+    else if not _.isUndefined(form[f].result)
+      result[id] = form[f].result
     else
       result[id] = $(element).val()
     #console.log({m:"Getting form field #{id}=#{result[id]} "+JSON.stringify(result)})

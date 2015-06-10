@@ -1,3 +1,5 @@
 <template name="fieldText">
 	<input id="{{field}}" type="text" placeholder="{{placeholder}}" class="{{clazz}}" value="{{value}}"/>
-</template> 
+</template>
+
+<template name="valueText">{{#if value}}{{value}}{{else}}-{{/if}}</template>

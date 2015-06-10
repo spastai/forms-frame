@@ -49,7 +49,6 @@ Template.TestForm.helpers
 
 Template.TestForm.events
   'click .save':  (event, template)->
-    console.log("Saving values");
     values = getFormValues(template.data.form, template);
-    #console.dir({m: "Form data", v: template.data.form});
+    #console.log({m: "Saving TestForm", v: values});
     Session.set "values", values

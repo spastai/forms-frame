@@ -1,0 +1,8 @@
+<template name="fieldPagepicture">
+	<input id="url-{{field}}" type="text" placeholder="{{placeholder}}" class="{{clazz}}" value="{{value}}"/>
+  {{#each images}}
+			<img src="{{src}}" class="{{#if selected}}img-polaroid{{else}}img-rounded{{/if}} selectPicture" height="100px" width="100px">
+	{{/each}}
+</template>
+
+<template name="valuePagepicture">{{#if value}}{{value}}{{else}}-{{/if}}</template>
