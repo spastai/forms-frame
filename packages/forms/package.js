@@ -1,22 +1,27 @@
 Package.describe({
-  name: 'dry:forms',
-  version: '0.0.1',
-  // Brief, one-line summary of the package.
-  summary: 'Dry Forms',
-  // URL to the Git repository containing the source code for this package.
-  git: '',
-  // By default, Meteor will default to using README.md for documentation.
-  // To avoid submitting documentation, set this field to null.
-  documentation: 'README.md'
+  summary: 'Meteor form framework',
+  name: 'dry:forms-frame',
+  version: "0.0.18",
+  git: "https://github.com/spastai/forms-frame"
 });
 
-Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.2');
-  api.addFiles('forms.js');
-});
+Package.on_use(function (api) {
+	api.versionsFrom('0.9.0');
 
-Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('dry:forms');
-  api.addFiles('forms-tests.js');
+  api.use(['underscore', 'handlebars', 'templating', 'coffeescript'], 'client');
+  api.add_files([
+       'fieldString.html', 'fieldString.js',
+       'fieldPassword.html',
+       'fieldTextarea.html',
+       'fieldHidden.html',
+       'fieldSelect.html', 'fieldSelect.js',
+       'fieldRadio.html', 'fieldRadio.js',
+       'fieldCheckbox.html', 'fieldCheckbox.js',
+       'fieldTags.html', 'fieldTags.js',
+       'fieldListEdit.html', 'fieldListEdit.js',
+       'fieldSubformRows.html', 'fieldSubformRows.js',
+       'helpers.coffee'],
+       'client');
+
+  if (api.export) api.export(['createFormValues', 'getFormValues'], 'client');
 });

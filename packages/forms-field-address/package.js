@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'spastai:forms-field-address',
+  name: 'dry:forms-field-address',
   version: '0.0.5',
   // Brief, one-line summary of the package.
   summary: 'Form frame field for addresses - provides map and text input',

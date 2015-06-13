@@ -7,7 +7,7 @@ class @TestFieldPagePictureController extends RouteController
 
   data: ()=>
     query = {};
-    d "Creating page picture form"
+    #d "Creating page picture form"
     formValues = createFormValues(fieldPagePictureForm, query);
     result =
       form: formValues
@@ -18,10 +18,11 @@ Template.PagePictureForm.rendered  = ()->
 Template.PagePictureForm.helpers
   values: ()->
     val = Session.get("values") || {};
-    createFormValues(fieldPagePictureForm, val);
+    #d "Show page picture values", val
+    createFormValues(fieldPagePictureForm, val, 'PagePictureForm');
 
 Template.PagePictureForm.events
   'click .save':  (event, template)->
     values = getFormValues(template.data.form, template);
-    #console.log({m: "Saving TestForm", v: values});
-    Session.set "values", values
+    d "Set page picture values", values
+    Session.set("values", values);

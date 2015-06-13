@@ -1,6 +1,6 @@
 Package.describe({
-  name: 'forms-field-pagepicture',
-  version: '0.0.1',
+  name: 'dry:forms-field-pagepicture',
+  version: '0.0.4',
   // Brief, one-line summary of the package.
   summary: 'Form frame field for url - allows to use picture from the page as thumbnail',
   // URL to the Git repository containing the source code for this package.
@@ -12,13 +12,17 @@ Package.describe({
 
 Npm.depends({
   gm: "1.9.0",
-  async: "1.2.1"
+  async: "1.2.1",
+  request: '2.57.0'
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('0.9.0');
 
-  api.use(['underscore', 'coffeescript'], ['server', 'client']);
+  api.use('spastai:logw@0.0.3')
+  api.use('dry:forms-frame@0.0.18');
+
+  api.use(['underscore', 'coffeescript', 'http'], ['server', 'client']);
   api.use(['handlebars', 'templating'], 'client');
 
   api.addFiles('pageImageServer.coffee', 'server');
