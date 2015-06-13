@@ -3,6 +3,7 @@ request = Npm.require("request");
 Future = Npm.require("fibers/future");
 gm = Npm.require("gm");
 async = Npm.require("async");
+URL = Npm.require("url");
 
 getImageDimensions = (url, callback) ->
   d 'Check dimensions:' + url
@@ -36,39 +37,10 @@ Meteor.methods
       port: 8080
       path: url
     else url
-    d "Get url images (no exception) #{options}"
+    host = URL.parse(url).protocol + "//"+URL.parse(url).host;
+    d "Get url images #{options} from host: #{host}"
 
     fut = new Future
-    #d 'Future created for nodejs http as it works with proxy : ', options
-    ###
-    request options, (error, response, body)->
-      d "Http request error - ", error
-      if !error && response.statusCode == 200
-        pattern = /<.+?[src|href]=[\"'](.+?jpg)[\"'].+?>/g
-        imgs = undefined
-        links = []
-        while (imgs = pattern.exec(body)) != null
-          #	v("Size:"+getImageSize(myArray[1]));
-          links.push imgs[1]
-        # check http://stackoverflow.com/questions/4631774/coordinating-parallel-execution-in-node-js
-        result = []
-        d 'Checking images links: ', links
-        async.forEach links, ((link, callback) ->
-          getImageSize link, (size) ->
-            v 'Size:' + size + ':' + link
-            if size > 10000
-              result.push
-                src: link
-                size: size
-            callback()
-        ), ->
-          d 'Images analysis done:', result
-          fut['return'] _.uniq(result, false, (value) ->
-            value.src
-          )
-    fut.wait()
-    ###
-
     ###
     http.get(options, (res) ->
       data = ''
@@ -102,7 +74,6 @@ Meteor.methods
       ).on 'error', (e)->
         console.log('ERROR')
         console.erorr(e);
-
     fut.wait()
     ###
 
@@ -119,6 +90,9 @@ Meteor.methods
       result = []
       #d 'Checking images links: ', links
       async.forEach links, ((link, callback) ->
+        #d "Convert local link to site"
+        if link[0] == '/'
+          link = host+link;
         getImageSize link, (size) ->
           v 'Size:' + size + ':' + link
           if size > 10000

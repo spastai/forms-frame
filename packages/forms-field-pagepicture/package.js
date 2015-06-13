@@ -13,7 +13,8 @@ Package.describe({
 Npm.depends({
   gm: "1.9.0",
   async: "1.2.1",
-  request: '2.57.0'
+  request: '2.57.0',
+  url: '0.10.3'
 });
 
 Package.onUse(function(api) {
