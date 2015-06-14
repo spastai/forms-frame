@@ -25,7 +25,7 @@ demoForm = [
 ]
 
 Template.Blank.rendered  = ()->
-  #console.log("Blank rendered");
+  #d "Blank rendered" 
 
 class @TestFormController extends RouteController
   template: "TestForm",

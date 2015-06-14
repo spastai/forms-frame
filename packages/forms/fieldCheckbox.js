@@ -1,6 +1,6 @@
 Template.fieldCheckbox.rendered = function() {
 	var data = this.data;
-	//console.log("Setting set result function for checkbox");
+	//d("Setting set result function for checkbox");
 	this.data.getResult = function() {
 		//console.log({m:"Checkbox value getResult", o: $("#"+data.field).is(':checked')});
 		return $("#"+data.field).is(':checked')

@@ -1,9 +1,11 @@
 Template.fieldAddress.rendered = ->
-  self = this
+  self = @
   element = document.getElementById(@data.field)
   mapElement = document.getElementById(@data.field + '-map-'+@data.formName)
+  self.data.result = self.data.value;
+  #d "Setting values to edit ", self.data.result
   googleServices.afterInit ->
-    center = undefined
+    center = ;
     if self.data.mapCenter
       loc = self.data.mapCenter()
       if loc then center = new (google.maps.LatLng)(loc[1], loc[0])
@@ -37,7 +39,6 @@ Template.fieldAddress.rendered = ->
         else
           self.data.result.location = ''
         self.data.dep.changed()
-
 
 Template.fieldAddress.helpers hasLocation: ->
   #d("Returning location:", this);

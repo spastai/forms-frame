@@ -12,3 +12,4 @@ coffeescript
 dry:forms-frame
 spastai:logw
 mike:mocha
+dry:forms-field-address
