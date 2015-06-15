@@ -1,6 +1,6 @@
 Package.describe({
   name: 'dry:forms-field-pagepicture',
-  version: '0.0.5',
+  version: '0.0.11',
   // Brief, one-line summary of the package.
   summary: 'Form frame field for url - allows to use picture from the page as thumbnail',
   // URL to the Git repository containing the source code for this package.

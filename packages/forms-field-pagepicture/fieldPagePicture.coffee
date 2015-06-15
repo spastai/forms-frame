@@ -1,11 +1,15 @@
 ###
  Try with http://pigu.lt/autoprekes/padangos/padanga_bp_pneus_19565_r15_91_h?id=881234
 ###
+Template.fieldPagepicture.rendered = ()->
+  #d "Rendered fieldPagepicture", @data
+  @data.result = @data.value;
+
 Template.fieldPagepicture.helpers
   images: ()->
     #d "Show images for "+$('[id^="url"]').val(), @images
     @dep.depend();
-    @images
+    @result?.images
   selected: (parent)->
     #d "Is selected: #{@src == parent.result?.selectedPicture}"
     parent.dep.depend();
@@ -35,5 +39,5 @@ fetchPictures = (url, template)->
       d 'Get images error:' + error
     else
       d 'Got response', result
-      template.data.images = result
+      template.data.result.images = result
       template.data.dep.changed();

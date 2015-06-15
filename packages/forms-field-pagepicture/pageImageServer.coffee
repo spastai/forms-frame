@@ -91,8 +91,8 @@ Meteor.methods
       #d 'Checking images links: ', links
       async.forEach links, ((link, callback) ->
         #d "Convert local link to site"
-        if link[0] == '/'
-          link = host+link;
+        if not link.match(/(http|ftp|https):\/\/[\w-]+(\.[\w-]+)/gi)
+          link = host+if('/' == link[0]) then link else '/'+link;
         getImageSize link, (size) ->
           v 'Size:' + size + ':' + link
           if size > 10000
