@@ -17,12 +17,12 @@ Template.PagePictureForm.rendered  = ()->
 
 Template.PagePictureForm.helpers
   values: ()->
-    val = Session.get("values") || {};
+    val = Session.get("urlValues") || {};
     #d "Show page picture values", val
     createFormValues(fieldPagePictureForm, val, 'PagePictureForm');
 
 Template.PagePictureForm.events
   'click .save':  (event, template)->
     values = getFormValues(template.data.form, template);
-    d "Set page picture values", values
-    Session.set("values", values);
+    d "Save page picture values", values
+    Session.set("urlValues", values);

@@ -3,7 +3,11 @@ UI.registerHelper "getFieldTemplate", ->
   template = "field" + name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()
   # console.log("Render:"+template);
   # console.dir(Template[template]);
-  (if Template[template] then Template[template] else null)
+  if Template[template]
+    Template[template]
+  else
+    console.warn "Template #{template} not found."
+    null
 
 UI.registerHelper "getValueTemplate", ->
   if not @type then e("No field type attribute provided."); return

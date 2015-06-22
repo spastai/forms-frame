@@ -1,0 +1,7 @@
+<template name="valueTextareauml">
+  {{#if uml}}
+    <div><img id="{{field}}Img" src="{{uml}}"></div>
+  {{else}}
+    {{#if value}}{{value}}{{else}}-{{/if}}
+  {{/if}}
+</template>

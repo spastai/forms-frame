@@ -1,3 +1,5 @@
+aspect.push "field-uml"
+
 categories = ()->
 	return [
 	  {title: "Audio", value: "audio"},
@@ -22,10 +24,11 @@ demoForm = [
 	{field: 'media', type: 'select', label: "Media", placeholder: "Select category", clazz: "form-control", options: categories},
 	{field: "form", type: "subformRows", form: fieldForm},
 	{field: 'check', type: 'checkbox', label: "Agreement", placeholder: "Enter URL", clazz: "form-control"},
+	{field: 'uml', type: 'textareauml', label: "Uml", placeholder: "Write PlantUML", clazz: "form-control"},
 ]
 
 Template.Blank.rendered  = ()->
-  #d "Blank rendered" 
+  #d "Blank rendered"
 
 class @TestFormController extends RouteController
   template: "TestForm",
@@ -50,5 +53,5 @@ Template.TestForm.helpers
 Template.TestForm.events
   'click .save':  (event, template)->
     values = getFormValues(template.data.form, template);
-    #console.log({m: "Saving TestForm", v: values});
+    #d "Saving TestForm", values
     Session.set "values", values

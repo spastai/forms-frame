@@ -5,8 +5,11 @@ Template.fieldAddress.rendered = ->
   self.data.result = self.data.value;
   #d "Setting values to edit ", self.data.result
   googleServices.afterInit ->
-    center = ;
-    if self.data.mapCenter
+    center = self.data.result;
+    if self.data.result
+      loc = self.data.result.location
+      center = new (google.maps.LatLng)(loc[1], loc[0])
+    else if self.data.mapCenter
       loc = self.data.mapCenter()
       if loc then center = new (google.maps.LatLng)(loc[1], loc[0])
     else if Meteor.settings?.formsFrame?.fieldAddress?.mapCenter
