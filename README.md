@@ -23,7 +23,7 @@ pass this variable to your template:
 ```handlebars
 <div class="row">
   <div class="col-xs-10 col-xs-offset-1">
-    {{#each form}}
+    {{#each demoForm}}
     <div class="form-group">
       <label for="{{field}}">{{label}}</label>
       {{> getFieldTemplate .}}
