@@ -6,7 +6,7 @@ Template.fieldAddress.rendered = ->
   #d "Setting values to edit ", self.data.result
   googleServices.afterInit ->
     center = self.data.result;
-    if self.data.result
+    if self.data.result?.location
       loc = self.data.result.location
       center = new (google.maps.LatLng)(loc[1], loc[0])
     else if self.data.mapCenter
@@ -29,7 +29,8 @@ Template.fieldAddress.rendered = ->
         if !error and result.length > 0
           location = result[0].geometry.location
           self.data.result.location = [location.lng(), location.lat()]
-          if !self.fromMarker
+          #d("Drop field marker if not present:"+self.fromMarker, location)
+          if not self.fromMarker
             #pinImage = new (google.maps.MarkerImage)('http://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|home|24|000|FFF', new (google.maps.Size)(32, 32), new (google.maps.Point)(0, 0), new (google.maps.Point)(16, 32))
             #d("Drop pin on map:"+pinImage, location)
             self.fromMarker = new (google.maps.Marker)(
@@ -42,6 +43,17 @@ Template.fieldAddress.rendered = ->
         else
           self.data.result.location = ''
         self.data.dep.changed()
+    #d("Drop field marker if not present:"+self.fromMarker, self.data.result.location)
+    if not self.fromMarker and self.data.result?.location
+      #pinImage = new (google.maps.MarkerImage)('http://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|home|24|000|FFF', new (google.maps.Size)(32, 32), new (google.maps.Point)(0, 0), new (google.maps.Point)(16, 32))
+      #d("Drop pin on map:"+pinImage, location)
+      self.fromMarker = new (google.maps.Marker)(
+        map: map
+        position: center
+        #icon: pinImage
+        draggable: true)
+      self.fromMarker.setPosition center
+
 
 Template.fieldAddress.helpers hasLocation: ->
   #d("Returning location:", this);
@@ -69,8 +81,8 @@ Template.valueAddress.rendered = ->
       center: center or new (google.maps.LatLng)(38.0179356, -122.5365176)
       mapTypeId: google.maps.MapTypeId.ROADMAP
     map = new (google.maps.Map)(mapElement, myOptions)
-    # Drop marker
-    if !self.fromMarker and self.data.value?.location
+    #d("Drop marker value if not present:"+self.fromMarker, self.data.value)
+    if not self.fromMarker and self.data.value?.location
       #pinImage = new (google.maps.MarkerImage)('http://chart.googleapis.com/chart?chst=d_simple_text_icon_left&chld=|14|000|home|24|000|FFF', new (google.maps.Size)(32, 32), new (google.maps.Point)(0, 0), new (google.maps.Point)(16, 32))
       #d("Drop pin on map:"+pinImage, location)
       self.fromMarker = new (google.maps.Marker)(

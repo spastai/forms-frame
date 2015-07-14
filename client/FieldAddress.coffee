@@ -1,12 +1,16 @@
 fieldAddressForm = [
     {field: "address", type: 'address', label: "Address", placeholder: "...", clazz: "form-control", group:"contact"},
+    {field: "address2", type: 'address', label: "Address", placeholder: "...", clazz: "form-control", group:"contact"},
 ]
 
 class @TestFieldAddressController extends RouteController
   template: "AddressForm",
 
   data: ()=>
-    query = {};
+    query = {
+      address: location: [-122.5365176, 38.0179356]
+      address2: location: [25.284004099999947, 54.6713496]
+    };
     formValues = createFormValues(fieldAddressForm, query);
     result =
       form: formValues

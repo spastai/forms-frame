@@ -14,7 +14,7 @@ Template.fieldTextareauml.events({
 			var umlText = parsedArray[1];
 			debouncedPlantUml(umlText, function(e) {
 			//plantUml(umlText, function(e) {
-				da(['field-uml'], "Got plantuml response:", e);
+				//da(['field-uml'], "Got plantuml response:", e);
 				el.attr("src", e);
 			});
 			el.show();

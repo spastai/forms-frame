@@ -1,6 +1,6 @@
 Package.describe({
   name: 'dry:forms-field-address',
-  version: '0.0.8',
+  version: '0.0.9',
   // Brief, one-line summary of the package.
   summary: 'Form frame field for addresses - provides map and text input',
   // URL to the Git repository containing the source code for this package.
