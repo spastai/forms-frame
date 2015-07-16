@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'Meteor form framework',
   name: 'dry:forms-frame',
-  version: "0.0.18",
+  version: "0.1.0",
   git: "https://github.com/spastai/forms-frame"
 });
 

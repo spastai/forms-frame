@@ -16,7 +16,7 @@ unless typeof MochaWeb is "undefined"
         Tracker.flush();
         $("#save").click();
         values = Session.get("values");
-        #console.log({m:"Test values:",v:values});
+        console.log "Test values:", values
         chai.assert.isFalse(values.check, "Fresh checkbox should be false")
         # Forse form re-rendering and setResults setting
         Router.go('Blank');
@@ -27,9 +27,9 @@ unless typeof MochaWeb is "undefined"
         Router.go('TestForm');
         Tracker.flush();
         # checkbox
-        $("#check").prop('checked', true);
+        $("#te-check").prop('checked', true);
         # subformRows
-        $("#field").val("qw");
+        $("#te-field").val("qw");
 
         $("#save").click();
         #console.dir(["Checkbox found:", $("#check")]);
@@ -57,20 +57,20 @@ unless typeof MochaWeb is "undefined"
         chai.assert.isTrue(values.check)
         Blaze.remove(view);
 
-    describe "Form edit, change, create", ->
+    describe "Form edit, change, update", ->
       it "should show new values", ->
         Router.go('Blank');
         #Log.info("Go to blank and flush for TC4");
         query =
           check: true;
         data =
-          form: createFormValues(testForm, query)
+          form: createFormValues(testForm, query, 'testForm', 'te-');
         parentNode = document.getElementById("forTest");
 
         #console.dir(["Creating view on body", parentNode]);
         view = Blaze.renderWithData(Template.TestForm, data, parentNode);
         Tracker.flush();
-        $("#check").prop('checked', false);
+        $("#te-check").prop('checked', false);
 
         #console.dir(["Checkbox in Blaze found:", $("#check")]);
         $("#save").click();

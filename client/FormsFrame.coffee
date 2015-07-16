@@ -35,7 +35,7 @@ class @TestFormController extends RouteController
 
   data: ()=>
     query = {};
-    formValues = createFormValues(demoForm, query);
+    formValues = createFormValues(demoForm, query, 'testForm', 'te-');
     result =
       form: formValues
 
@@ -52,6 +52,6 @@ Template.TestForm.helpers
 
 Template.TestForm.events
   'click .save':  (event, template)->
-    values = getFormValues(template.data.form, template);
+    values = getFormValues(template.data.form, template, 'te-');
     #d "Saving TestForm", values
     Session.set "values", values

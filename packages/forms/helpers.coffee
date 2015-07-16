@@ -24,7 +24,7 @@ UI.registerHelper "getValueTemplate", ->
 getUiid = ()->
   new Mongo.ObjectID().toHexString();
 
-createFormValues = (form, values, formName = getUiid()) ->
+createFormValues = (form, values, formName = getUiid(), idPrefix) ->
   result = []
   _(form).each (item) ->
     result.push _.extend(
@@ -33,18 +33,23 @@ createFormValues = (form, values, formName = getUiid()) ->
       parent: result
       formName: formName
     , item)
+  if idPrefix
+    #console.log "Add prefix"
+    _(result).each (item) ->
+      item.field = idPrefix + item.field
   result
 
-getFormValues = (form, template) ->
+getFormValues = (form, template, idPrefix = '') ->
   result = {}
   ###
   console.log s:"Fetching values from DOM and form variable:", v:_.map form, (item)->
     _.omit(item, 'dep')
   ###
-  #console.log({m:"Get form values start "+ JSON.stringify(result)});
+  console.log "Get form values start with prefix #{idPrefix}", JSON.stringify(result)
   for f of form
-    id = form[f].field
-    element = template.find("#" + id)
+    # remove prefix
+    id = form[f].field.slice(idPrefix.length);
+    element = template.find("#" + idPrefix + id)
     if form[f].getResult
       result[id] = form[f].getResult()
     # This form is used in fieldAddress
