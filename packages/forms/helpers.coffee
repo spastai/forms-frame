@@ -45,10 +45,10 @@ getFormValues = (form, template, idPrefix = '') ->
   console.log s:"Fetching values from DOM and form variable:", v:_.map form, (item)->
     _.omit(item, 'dep')
   ###
-  console.log "Get form values start with prefix #{idPrefix}", JSON.stringify(result)
+  #console.log "Get form values start with prefix #{idPrefix}", JSON.stringify(result)
   for f of form
     # remove prefix
-    id = form[f].field.slice(idPrefix.length);
+    id = form[f].field
     element = template.find("#" + idPrefix + id)
     if form[f].getResult
       result[id] = form[f].getResult()
