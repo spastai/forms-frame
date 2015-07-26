@@ -1,0 +1,17 @@
+<template name="fieldImage">
+	<span id="{{field}}" class="btn btn-default btn-file">
+	    Browse <input class="uploadFile" type="file" multiple>
+	</span>
+
+	<div class="row">
+    {{#each images}}
+	  <div class="{{../size}}">
+	    <a href="#" class="thumbnail select" 
+	       style="{{#if isSelected ..}}background-color:gainsboro{{/if}}">
+	        <img src="{{.}}" alt="" class="img-polaroid" width="75px" height="75px" >
+	    </a>
+	  </div>
+	  {{/each}}
+	</div>	
+</template> 
+

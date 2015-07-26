@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'Meteor form framework',
   name: 'dry:forms-frame',
-  version: "0.1.1",
+  version: "0.1.3",
   git: "https://github.com/spastai/forms-frame"
 });
 
@@ -14,7 +14,7 @@ Package.on_use(function (api) {
        'fieldPassword.html',
        'fieldTextarea.html',
        'fieldHidden.html',
-       'fieldSelect.html', 'fieldSelect.js',
+       'fieldSelect.html', 'fieldSelect.js', 'valueSelect.html', 'valueSelect.coffee',
        'fieldRadio.html', 'fieldRadio.js',
        'fieldCheckbox.html', 'fieldCheckbox.js',
        'fieldTags.html', 'fieldTags.js',
