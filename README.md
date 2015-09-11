@@ -36,6 +36,11 @@ and you will get whole form generated
 
 For more so called fields - check the packages.
 
+Samples
+-------
+[Table of forms - each row to edit collection item](https://github.com/spastai/forms-neld-row-table)
+
+
 Testing
 -------------
 1. UI tests
